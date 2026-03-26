@@ -1,72 +1,34 @@
-// -- Topic ActivityIndicator (Dynamic Indicator) --
-// Make an Array of the Skills.
-// Apply Map Over The Radio Button
-// Update State With Skills
- 
+// --- Topic - is ActivityIndicator 
+//  In Native is Symbol Like Loading single orr Like Shut-down Circle in PC ---
+
 import React, { useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Button, ActivityIndicator } from "react-native";
 
 const App = () => {
-  const [selectedRadio, setSelectedRadio] = useState(1);
+  const [show, setShow] = useState(false);
 
+  const displayLoader = () => {
+    setShow(true);
+    setTimeout(() => {
+      setShow(false);
+    }, 5000);     //-- Here Define 5 sec the Loading Indicator Running Then Cloused 
+  };
   return (
     <View style={styles.main}>
-      
-      <TouchableOpacity onPress={() => setSelectedRadio(1)}>
-        <View style={styles.radioWrapper}>
-          <View style={styles.radio}>
-            {selectedRadio === 1 && <View style={styles.radioBg} />}
-          </View>
-          <Text style={styles.radioText}>Radio 1</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => setSelectedRadio(2)}>
-        <View style={styles.radioWrapper}>
-          <View style={styles.radio}>
-            {selectedRadio === 2 && <View style={styles.radioBg} />}
-          </View>
-          <Text style={styles.radioText}>Radio 2</Text>
-        </View>
-      </TouchableOpacity>
-
+      <ActivityIndicator size="large" color="green" animating={show} />
+      <Button title="showLoader" onPress={displayLoader} />
     </View>
   );
 };
 
+//  Here Styling Of inside the main ActivityIndicator --  
+
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
-
-  radioText: {
-    fontSize: 20,
-    color: 'skyblue'
-  },
-
-  radio: {
-    height: 40,
-    width: 40,
-    borderColor: 'orange',
-    borderWidth: 2,
-    borderRadius: 20,
-    margin: 10
-  },
-
-  radioBg: {
-    backgroundColor: 'yellow',
-    height: 28,
-    width: 28,
-    borderRadius: 20,
-    margin: 4
-  },
-
-  radioWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  }
-
 });
+
 export default App;
