@@ -1,34 +1,42 @@
-// --- Topic - is ActivityIndicator 
-//  In Native is Symbol Like Loading single orr Like Shut-down Circle in PC ---
+// --- Topic - is Modal In Native 
+// Modal is a component is That Dispaly Content Top of Your Screen Box orr Dialog box
+// So Commonly Used For .Alert, .Forms, Conformation etc
 
 import React, { useState } from "react";
-import { View, StyleSheet, Button, ActivityIndicator } from "react-native";
+import { View, Text, Button, Modal, StyleSheet } from "react-native";
 
 const App = () => {
-  const [show, setShow] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-  const displayLoader = () => {
-    setShow(true);
-    setTimeout(() => {
-      setShow(false);
-    }, 5000);     //-- Here Define 5 sec the Loading Indicator Running Then Cloused 
-  };
   return (
-    <View style={styles.main}>
-      <ActivityIndicator size="large" color="green" animating={show} />
-      <Button title="showLoader" onPress={displayLoader} />
+    // Here on Press The Showing Modal Box 
+    <View style={styles.container}>
+      <Button title="Open Modal" onPress={() => setVisible(true)} />
+
+      <Modal visible={visible} transparent={true} animationType="slide">
+        <View style={styles.modalView}>
+          <Text>This is a Modal</Text>
+
+          // --- Here Close Button when Information Getting The Click Close ---
+          <Button title="Close" onPress={() => setVisible(false)} />
+        </View>
+      </Modal>
     </View>
   );
 };
 
-//  Here Styling Of inside the main ActivityIndicator --  
-
+//  --- And Here Styling ---
 const styles = StyleSheet.create({
-  main: {
+  container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
+  modalView: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
-
 export default App;
